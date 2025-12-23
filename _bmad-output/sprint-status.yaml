@@ -1,0 +1,127 @@
+# generated: 2025-12-23
+# project: tourvn_app
+# tracking_system: file-system
+# story_location: _bmad-output
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2025-12-23
+project: tourvn_app
+tracking_system: file-system
+story_location: _bmad-output
+
+development_status:
+  # Epic 1: Project Foundation & App Shell (5 stories) ✓ COMPLETE
+  epic-1: done
+  1-1-firebase-project-setup-flutter-configuration: done
+  1-2-clean-architecture-folder-structure: done
+  1-3-tourvn-theme-design-system: done
+  1-4-navigation-shell-bottom-navigation: done
+  1-5-firestore-security-rules-indexes: done
+  epic-1-retrospective: optional
+
+  # Epic 2: User Authentication & Profiles (5 stories)
+  epic-2: backlog
+  2-1-user-registration-with-email-social-login: backlog
+  2-2-user-login-logout: backlog
+  2-3-user-profile-view-edit: backlog
+  2-4-role-switching-tourist-guide: backlog
+  2-5-auth-state-provider-role-management: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Location Discovery & Mood-Based Browsing (9 stories)
+  epic-3: backlog
+  3-1-location-data-model-repository: backlog
+  3-2-mood-chips-mood-based-filtering: backlog
+  3-3-distance-filtering-geolocation: backlog
+  3-4-location-cards-infinite-scroll: backlog
+  3-5-save-favorite-locations: backlog
+  3-6-empty-states-fallbacks: backlog
+  3-7-trending-locations-display: backlog
+  3-8-offline-state-caching: backlog
+  3-9-location-permission-handling: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Location Details & AI Articles (6 stories)
+  epic-4: backlog
+  4-1-location-detail-bottom-sheet: backlog
+  4-2-swipeable-photo-gallery: backlog
+  4-3-ai-article-display: backlog
+  4-4-navigate-to-location-external-maps: backlog
+  4-5-share-location: backlog
+  4-6-deep-linking-support: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Reviews & Ratings (6 stories)
+  epic-5: backlog
+  5-1-review-data-model-repository: backlog
+  5-2-view-location-reviews: backlog
+  5-3-write-review-with-text: backlog
+  5-4-add-photos-to-review: backlog
+  5-5-rating-stars-component: backlog
+  5-6-review-count-average-display-denormalization: backlog
+  epic-5-retrospective: optional
+
+  # Epic 6: Tour Guide Discovery (5 stories)
+  epic-6: backlog
+  6-1-guide-data-model-repository: backlog
+  6-2-view-guides-for-location: backlog
+  6-3-view-guide-profile: backlog
+  6-4-view-tour-details: backlog
+  6-5-contact-tour-guide: backlog
+  epic-6-retrospective: optional
+
+  # Epic 7: Tour Guide Marketplace (7 stories)
+  epic-7: backlog
+  7-1-guide-registration-flow: backlog
+  7-2-kyc-document-upload: backlog
+  7-3-kyc-application-status: backlog
+  7-4-create-tour-listing: backlog
+  7-5-manage-tour-listings: backlog
+  7-6-view-booking-inquiries: backlog
+  7-7-push-notifications-for-guides: backlog
+  epic-7-retrospective: optional
+
+  # Epic 8: AI Content Pipeline & Admin Dashboard (13 stories)
+  epic-8: backlog
+  8-1-admin-dashboard-setup-react: backlog
+  8-2-ai-pipeline-tiktok-url-input: backlog
+  8-3-ai-pipeline-video-download-stt: backlog
+  8-4-ai-pipeline-gemini-article-generation: backlog
+  8-5-ai-pipeline-location-matching: backlog
+  8-6-content-approval-queue: backlog
+  8-7-article-editor-publishing: backlog
+  8-8-add-new-location-from-ai-content: backlog
+  8-9-kyc-application-queue: backlog
+  8-10-kyc-approve-reject: backlog
+  8-11-tour-approval-queue: backlog
+  8-12-user-moderation: backlog
+  8-13-dashboard-metrics: backlog
+  epic-8-retrospective: optional

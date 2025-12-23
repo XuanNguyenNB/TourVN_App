@@ -1,0 +1,72 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // ============================================
+    // HELPER FUNCTIONS
+    // ============================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // ============================================
+    // USER PROFILE IMAGES
+    // ============================================
+    
+    match /users/{userId}/profile/{fileName} {
+      // Anyone can read profile images
+      allow read: if true;
+      
+      // Only owner can upload their profile image
+      allow write: if isOwner(userId) &&
+        request.resource.size < 5 * 1024 * 1024 && // Max 5MB
+        request.resource.contentType.matches('image/.*');
+    }
+    
+    // ============================================
+    // LOCATION IMAGES (Admin only)
+    // ============================================
+    
+    match /locations/{locationId}/{fileName} {
+      // Anyone can read location images
+      allow read: if true;
+      
+      // Write restricted (admin via Cloud Functions)
+      allow write: if false;
+    }
+    
+    // ============================================
+    // KYC DOCUMENTS (Guide verification)
+    // ============================================
+    
+    match /kyc/{userId}/{fileName} {
+      // Only owner and admins can read KYC docs
+      allow read: if isOwner(userId);
+      
+      // Only owner can upload KYC documents
+      allow write: if isOwner(userId) &&
+        request.resource.size < 10 * 1024 * 1024 && // Max 10MB
+        (request.resource.contentType.matches('image/.*') ||
+         request.resource.contentType == 'application/pdf');
+    }
+    
+    // ============================================
+    // TOUR IMAGES
+    // ============================================
+    
+    match /tours/{tourId}/{fileName} {
+      // Anyone can read tour images
+      allow read: if true;
+      
+      // Guides can upload to their tours (verified via Cloud Functions)
+      allow write: if isAuthenticated() &&
+        request.resource.size < 5 * 1024 * 1024 &&
+        request.resource.contentType.matches('image/.*');
+    }
+  }
+}

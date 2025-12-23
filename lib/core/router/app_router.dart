@@ -1,46 +1,67 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-/// App router configuration using GoRouter
-class AppRouter {
-  AppRouter._();
+import 'package:tourvn_app/core/router/routes.dart';
+import 'package:tourvn_app/core/widgets/main_scaffold.dart';
+import 'package:tourvn_app/features/discover/presentation/screens/discover_screen.dart';
+import 'package:tourvn_app/features/profile/presentation/screens/profile_screen.dart';
+import 'package:tourvn_app/features/saved/presentation/screens/saved_screen.dart';
 
-  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+part 'app_router.g.dart';
 
-  static final GoRouter router = GoRouter(
-    navigatorKey: _rootNavigatorKey,
-    initialLocation: '/',
-    debugLogDiagnostics: true,
+/// App router provider using GoRouter with ShellRoute pattern.
+///
+/// The ShellRoute wraps the main navigation tabs (Discover, Saved, Profile)
+/// in a persistent shell with bottom navigation.
+@riverpod
+GoRouter appRouter(AppRouterRef ref) {
+  return GoRouter(
+    initialLocation: Routes.discover,
+    debugLogDiagnostics: kDebugMode,
     routes: [
+      // Redirect root to discover
       GoRoute(
         path: '/',
-        name: 'home',
-        builder: (context, state) => const Scaffold(
-          body: Center(
-            child: Text('TourVN - Home'),
-          ),
-        ),
+        redirect: (context, state) => Routes.discover,
       ),
+      // Main shell with bottom navigation
+      ShellRoute(
+        builder: (context, state, child) => MainScaffold(child: child),
+        routes: [
+          GoRoute(
+            path: Routes.discover,
+            name: 'discover',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: DiscoverScreen(),
+            ),
+          ),
+          GoRoute(
+            path: Routes.saved,
+            name: 'saved',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: SavedScreen(),
+            ),
+          ),
+          GoRoute(
+            path: Routes.profile,
+            name: 'profile',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ProfileScreen(),
+            ),
+          ),
+        ],
+      ),
+      // Full-screen routes (outside shell) - for future stories
+      // GoRoute(path: Routes.locationDetail, ...),
+      // GoRoute(path: Routes.articleDetail, ...),
     ],
     errorBuilder: (context, state) => Scaffold(
+      appBar: AppBar(title: const Text('Error')),
       body: Center(
         child: Text('Page not found: ${state.uri}'),
       ),
     ),
   );
-}
-
-/// Route names for type-safe navigation
-class AppRoutes {
-  AppRoutes._();
-
-  static const String home = '/';
-  static const String login = '/login';
-  static const String register = '/register';
-  static const String profile = '/profile';
-  static const String locationDetail = '/location/:id';
-  static const String articleDetail = '/article/:id';
-  static const String guideProfile = '/guide/:id';
-  static const String search = '/search';
-  static const String savedLocations = '/saved';
 }
