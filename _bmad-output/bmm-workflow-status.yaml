@@ -1,0 +1,114 @@
+# BMM Workflow Status - TourVN App
+# Generated: 2025-12-23
+# Track: BMad Method (Greenfield)
+
+generated: "2025-12-23"
+project: "tourvn_app"
+project_type: "mobile_app_flutter"
+selected_track: "bmad-method"
+field_type: "greenfield"
+workflow_path: "method-greenfield.yaml"
+
+# Project Context
+project_description: |
+  Mobile app (Flutter) for Vietnam tourism news & reviews.
+  Location-based recommendations and multi-role user system.
+  Admin manages content via web-based dashboard (including
+  AI-powered content generation from video transcripts).
+  Graduation project.
+
+user_roles:
+  - Users (tourists browsing destinations)
+  - Tour Guides (verified content creators)
+  - Admin (content moderation, user approval)
+
+key_features:
+  - AI-collected and updated tourist locations
+  - Video transcript summarization for reviews (admin web dashboard)
+  - User-generated reviews
+  - Time & location-based recommendations
+  - Multi-role access control
+  - Admin web-based control panel (separate from mobile app)
+
+# Workflow Status
+# STATUS KEY:
+#   required/optional/recommended/conditional = not started
+#   {file-path} = completed (file created)
+#   skipped = optional workflow that was skipped
+
+workflow_status:
+  # Phase 0: Discovery (Optional)
+  phase_0_discovery:
+    brainstorm-project:
+      status: "_bmad-output/analysis/brainstorming-session-2025-12-23.md"
+      agent: "analyst"
+      command: "/analyst then brainstorm-project"
+      note: "Completed 2025-12-23 - Product vision, tech stack, MVP plan defined"
+    
+    research:
+      status: "optional"
+      agent: "analyst"
+      command: "/analyst then research"
+      note: "Technical/competitive analysis"
+    
+    product-brief:
+      status: "_bmad-output/analysis/product-brief-tourvn_app-2025-12-23.md"
+      agent: "analyst"
+      command: "/analyst then product-brief"
+      note: "Completed 2025-12-23 - Vision, users, metrics, MVP scope defined"
+
+  # Phase 1: Planning
+  phase_1_planning:
+    prd:
+      status: "_bmad-output/prd.md"
+      agent: "pm"
+      command: "/pm then prd"
+      output: "Product Requirements Document with FRs and NFRs"
+      note: "Completed 2025-12-23 - 52 FRs, 30 NFRs, 3 user journeys, AI pipeline innovation"
+    
+    create-ux-design:
+      status: "conditional"
+      agent: "ux-designer"
+      command: "/ux-designer then create-ux-design"
+      note: "Determined after PRD - if project has UI"
+
+  # Phase 2: Solutioning
+  phase_2_solutioning:
+    create-architecture:
+      status: "_bmad-output/architecture.md"
+      agent: "architect"
+      command: "/architect then create-architecture"
+      output: "System architecture document"
+      note: "Completed 2025-12-23 - 15+ decisions, Clean Architecture + Firebase"
+    
+    create-epics-and-stories:
+      status: "_bmad-output/epics.md"
+      agent: "pm"
+      command: "/pm then create-epics-and-stories"
+      note: "Completed 2025-12-23 - 8 epics, 56 stories, all 52 FRs covered"
+    
+    test-design:
+      status: "recommended"
+      agent: "tea"
+      command: "/tea then test-design"
+      output: "System-level testability review"
+    
+    validate-architecture:
+      status: "optional"
+      agent: "architect"
+      command: "/architect then validate-architecture"
+      note: "Quality check for architecture completeness"
+    
+    implementation-readiness:
+      status: "required"
+      agent: "architect"
+      command: "/architect then implementation-readiness"
+      note: "Gate check: validates PRD + Architecture + Epics + UX"
+
+  # Phase 3: Implementation
+  phase_3_implementation:
+    sprint-planning:
+      status: "required"
+      agent: "sm"
+      command: "/sm then sprint-planning"
+      note: "Creates sprint plan - subsequent work tracked in sprint-status.yaml"
